@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - master
 
 env:
-  DOTNET_VERSION: "9.x"
+  DOTNET_VERSION: "8.0.x"
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: DevHabit
+        working-directory: DevHabits.Api
 
     steps:
       - uses: actions/checkout@v4
@@ -26,13 +26,13 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Restore
-        run: dotnet restore DevHabit.sln
+        run: dotnet restore DevHabits.Api.sln
 
       - name: Build
-        run: dotnet build DevHabit.sln --configuration Release --no-restore
+        run: dotnet build DevHabits.Api.sln --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test DevHabit.sln --configuration Release --no-restore --no-build
+        run: dotnet test DevHabits.Api.sln --configuration Release --no-restore --no-build
 
       - name: Publish
-        run: dotnet publish DevHabit.sln --configuration Release --no-restore --no-build
+        run: dotnet publish DevHabits.Api.sln --configuration Release --no-restore --no-build
