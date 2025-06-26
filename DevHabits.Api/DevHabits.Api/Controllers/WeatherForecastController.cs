@@ -5,7 +5,7 @@ namespace DevHabits.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+internal partial class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
     {
@@ -23,7 +23,7 @@ public class WeatherForecastController : ControllerBase
     
     public IEnumerable<WeatherForecast> Get()
     {
-        _logger.LogInformation("Getting weather forecast");
+        LogGettingWeatherForecast(_logger);
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
@@ -32,4 +32,7 @@ public class WeatherForecastController : ControllerBase
         })
         .ToArray();
     }
+
+    [LoggerMessage(EventId = 1, Level = LogLevel.Information, Message = "Getting weather forecast")]
+    internal static partial void LogGettingWeatherForecast(ILogger logger);
 }
