@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 
 namespace DevHabits.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-internal partial class WeatherForecastController : ControllerBase
+[SuppressMessage("Performance", "CA1812:Avoid uninstantiated internal classes", Justification = "Controller is instantiated by ASP.NET Core framework")]
+internal sealed partial class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
     {
