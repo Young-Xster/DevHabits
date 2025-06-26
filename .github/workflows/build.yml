@@ -25,9 +25,6 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Restore
-        run: dotnet restore DevHabits.Api.sln
-
       - name: Build
         run: dotnet build DevHabits.Api.sln --configuration Release --no-restore
 
